@@ -2,7 +2,6 @@ package team.sheldon;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,7 +25,8 @@ public class AdreliMain {
 
     while (main.isRunning()) {
       main.printMenu();
-      String nextInput = main.getScanner().next();
+      String nextInput = main.getScanner()
+          .next();
       int number = Integer.parseInt(nextInput);
       switch (number) {
       case 0:
@@ -44,15 +44,31 @@ public class AdreliMain {
         break;
       case 3:
         System.out.print("Dateiname zum speichern eingeben: ");
-        main.savePersons(main.getScanner().next());
+        main.savePersons(main.getScanner()
+            .next());
         break;
       case 4:
         System.out.println("Dateiname zum laden eingeben: ");
-        main.loadPersons(main.getScanner().next());
+        main.loadPersons(main.getScanner()
+            .next());
+        break;
+      case 5:
+        System.out.println("Dateiname zum loeschen eingeben: ");
+        main.deleteFile(main.getScanner()
+            .next());
         break;
       default:
         // nothing to do here yet
       }
+    }
+  }
+
+  private void deleteFile(String filename) {
+    File file = new File(filename);
+    if (file.delete()) {
+      System.out.println("Datei: " + filename + " wurde geloescht.");
+    } else {
+      System.out.println("Loeschen der Datei " + filename + " hat leider nicht geklappt.");
     }
   }
 
@@ -61,7 +77,8 @@ public class AdreliMain {
       System.out.println(person);
       try {
         System.in.read();
-      } catch (IOException e) {}
+      } catch (IOException e) {
+      }
     }
   }
 
@@ -77,6 +94,7 @@ public class AdreliMain {
     System.out.println("2. Alle Anzeigen");
     System.out.println("3. Personen speichern");
     System.out.println("4. Personen laden");
+    System.out.println("5. Personen Datei loeschen");
     System.out.println();
     System.out.println("Bitte tippen Sie ein Menupunkt und bestaetigen mit Enter [0-5]:");
   }
@@ -89,33 +107,33 @@ public class AdreliMain {
     String name = getScanner().next();
     System.out.print("Vorname: ");
     String vorname = getScanner().next();
-    
+
     if (name != null && vorname != null) {
       neuePerson = new Person(name, vorname);
     }
 
     return neuePerson;
   }
-  
+
   public void savePersons(String filename) throws IOException {
     List<String> lines = new ArrayList<>();
-    
+
     for (Person person : personen) {
       lines.add(person.toFileString());
     }
-    
+
     Path file = Paths.get(filename);
     Files.write(file, lines, Charset.forName("UTF-8"));
   }
 
   public void loadPersons(String filename) throws IOException {
     Path file = Paths.get(filename);
-    List<String> allLines = Files.readAllLines(file,Charset.forName("UTF-8"));
+    List<String> allLines = Files.readAllLines(file, Charset.forName("UTF-8"));
     for (String string : allLines) {
       personen.add(new Person(string));
     }
   }
-  
+
   /**
    * @return the isRunning
    */
