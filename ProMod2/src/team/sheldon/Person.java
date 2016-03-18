@@ -2,29 +2,30 @@ package team.sheldon;
 
 public class Person {
 
+  private static final String TRENNER = "%%%";
   private String name;
+  private String vorname;
   
-  public Person(String newName) {
+  public Person(String newName, String newVorname) {
     this.name = newName;
+    this.vorname = newVorname;
   }
   
-  /**
-   * @return the name
-   */
-  public String getName() {
-    return name;
+  public Person(String fromFileString) {
+    String[] strings = fromFileString.split(TRENNER);
+    this.name = strings[0];
+    this.vorname = strings[1];
   }
-  
-  /**
-   * @param name the name to set
-   */
-  public void setName(String newName) {
-    this.name = newName;
-  }
-  
   
   @Override
   public String toString() {
-    return "[ Name:" + name + " ]";
+    return "[ " +
+        "Name:" + name + "\n" +
+        "Vorname: " +  vorname +
+        "]";
+  }
+  
+  public String toFileString() {
+    return name + TRENNER + vorname;
   }
 }
