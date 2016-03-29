@@ -11,6 +11,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+import jdk.nashorn.internal.ir.GetSplitState;
+import sun.security.action.GetBooleanSecurityPropertyAction;
+
 /**
  * Die Hauptklasse
  *
@@ -66,11 +69,27 @@ public class AdreliMain {
 					break;
 				case 1:
 					// Person wird erfasst und dem Array hinzugefuegt
-					Person erfasstePerson = main.erfassePerson();
-					// TODO exception handling
-					if (erfasstePerson != null) {
-						main.addPerson(erfasstePerson);
-					}
+				  boolean weiterePersonHinzufuegen = true;
+				  
+				  while(weiterePersonHinzufuegen) {
+				    Person erfasstePerson = main.erfassePerson();
+	          // TODO exception handling
+	          if (erfasstePerson != null) {
+	            main.addPerson(erfasstePerson);
+	          }
+	          
+	          System.out.print("Weitere Person hinzufuegen? J/N:");
+	          String next = main.getScanner().next();
+	          
+	          while (!next.matches("J|N")) {
+	            System.out.print("Nur `J` und `N` sind erlaubt: ");
+	          }
+	          
+	          if (next.equals("N")) {
+	            weiterePersonHinzufuegen = false;
+	          }
+				  }
+					
 					break;
 				case 2:
 					// Alle Personen werden angezeigt
