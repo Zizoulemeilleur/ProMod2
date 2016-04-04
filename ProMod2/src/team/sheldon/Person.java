@@ -66,11 +66,10 @@ public class Person implements Comparable<Person> {
 
 	@Override
 	public String toString() {
-		return "[ " + "Name:" + getName() + "\n" + "Vorname: " + getVorname()
-				+ "\n" + "Anrede: " + getAnrede() + "\n" + "Straße: "
-				+ getStraße() + "\n" + "PLZ:" + getPLZ() + "\n" + "Ort:"
-				+ getOrt() + "\n" + "Telefon:" + getTelefon() + "\n" + "Fax:"
-				+ getFax() + "\n" + "Bemerkung:" + getBemerkung() + "]";
+		return String
+				.format("\nName: %s\nVorname: %s\nAnrede: %s\nStrasse: %s\nPLZ: %s\nOrt%s\nTelefon: %s\nFax: %s\nBemerkung: %s\n",
+						name, vorname, anrede, straße, plz, ort, telefon, fax,
+						bemerkung);
 	}
 
 	/**

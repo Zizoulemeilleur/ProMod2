@@ -77,7 +77,6 @@ public class AdreliMain {
 						String allesOk = main.getScanner().next();
 						while (!allesOk.matches("J|N")) {
 							System.out.print("Nur `J` und `N` sind erlaubt: ");
-							allesOk = main.getScanner().next();
 						}
 
 						boolean korrigieren = allesOk.equals("N");
@@ -95,7 +94,6 @@ public class AdreliMain {
 
 						while (!next.matches("J|N")) {
 							System.out.print("Nur `J` und `N` sind erlaubt: ");
-							next = main.getScanner().next();
 						}
 
 						if (next.equals("N")) {
@@ -282,7 +280,7 @@ public class AdreliMain {
 	private String erfasseVorname() {
 		String vorname = null;
 		vorname = getScanner().next();
-		// Vorname auf Korrektheit prüfen
+
 		while (!vorname.matches("[A-Z][a-z]*")) {
 			System.out
 					.println("Nur führende Großbuchstaben und folgende Kleinbuchstaben erlaubt!");
@@ -296,7 +294,7 @@ public class AdreliMain {
 		String name = null;
 		name = getScanner().next();
 
-		// Name auf Korrektheit prüfen
+		// while (abcdf.length() < 3) {
 		while (!name.matches("[A-Z][a-z]*")) {
 			System.out
 					.println("Nur führende Großbuchstaben und folgende Kleinbuchstaben erlaubt!");
@@ -311,7 +309,7 @@ public class AdreliMain {
 		String anrede = null;
 		anrede = getScanner().next();
 
-		// Anrede auf Korrektheit prüfen
+		// while (abcdf.length() < 3) {
 		while (!anrede.matches("Herr|Frau")) {
 			System.out.println("Bitte entweder Herr oder Frau angeben!");
 			System.out.print("Anrede: ");
@@ -325,9 +323,8 @@ public class AdreliMain {
 		getScanner().nextLine();
 		strasse = getScanner().nextLine();
 
-		// Strassenangaben auf Korrektheit prüfen
-		while (!strasse
-				.matches("[A-Z][a-z]*\\s[0-9]*|[A-Z][a-z]*\\s[A-Z][a-z]*\\s[0-9]*")) {
+		// while (abcdf.length() < 3) {
+		while (!strasse.matches("[A-Z][a-z]*\\s[0-9]*")) {
 			System.out
 					.println("Bitte Straßenname und Hausnr angeben bsp: Musterstrasse 5!");
 			System.out.print("Straße: ");
@@ -342,7 +339,7 @@ public class AdreliMain {
 		String plz = null;
 		plz = getScanner().next();
 
-		// PLZ auf Korrektheit prüfen
+		// while (abcdf.length() < 3) {
 		while (!plz.matches("[0-9]{5}")) {
 			System.out.println("Zahlen von 0-9 und 5 stellen sind erlaubt!");
 			System.out.print("PLZ: ");
@@ -357,8 +354,8 @@ public class AdreliMain {
 		getScanner().nextLine();
 		ort = getScanner().nextLine();
 
-		// Ortsangaben auf Korrektheit prüfen
-		while (!ort.matches("[A-Z][a-z]*\\s[A-Za-z]*\\s[A-Za-z]*|[A-Z][a-z]*")) {
+		// while (abcdf.length() < 3) {
+		while (!ort.matches("[A-Z][a-z]*\\s[A-Za-z]*\\s[A-Za-z]*")) {
 			System.out
 					.println("Bitte den korrekten Ortsnamen angeben bsp: Frankfurt o. Frankfurt am Main");
 			System.out.print("Ort: ");
@@ -372,7 +369,7 @@ public class AdreliMain {
 		String telefon = null;
 		telefon = getScanner().next();
 
-		// Telefonnummer auf Korrektheit prüfen
+		// while (abcdf.length() < 3) {
 		while (!telefon.matches("[0-9].{3,14}")) {
 			System.out
 					.println("Nur Zahlen von 0-9 und 3-14 stellen sind erlaubt!");
@@ -387,7 +384,7 @@ public class AdreliMain {
 		String fax = null;
 		fax = getScanner().next();
 
-		// Faxnummer auf Korrektheit prüfen
+		// while (abcdf.length() < 3) {
 		while (!fax.matches("[0-9].{3,14}")) {
 			System.out
 					.println(" NurZahlen von 0-9 und 3-14 stellen sind erlaubt!");
@@ -402,7 +399,7 @@ public class AdreliMain {
 		String bemerkung = null;
 		bemerkung = getScanner().next();
 
-		// Bemerkung auf Korrektheit prüfen
+		// while (abcdf.length() < 3) {
 		while (!bemerkung.matches("[^;]{4,300}")) {
 			System.out.println("Bitte Bemerkung korrekt eingeben !");
 			System.out.print("Bemerkung: ");
