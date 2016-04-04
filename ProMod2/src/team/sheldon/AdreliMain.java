@@ -70,7 +70,22 @@ public class AdreliMain {
 
 					while (weiterePersonHinzufuegen) {
 						Person erfasstePerson = main.erfassePerson();
-						// TODO exception handling
+
+						System.out.println(erfasstePerson);
+						System.out.println("Stimmt's? (J/N)");
+
+						String allesOk = main.getScanner().next();
+						while (!allesOk.matches("J|N")) {
+							System.out.print("Nur `J` und `N` sind erlaubt: ");
+							allesOk = main.getScanner().next();
+						}
+
+						boolean korrigieren = allesOk.equals("N");
+
+						if (korrigieren) {
+							main.erfassePerson(erfasstePerson);
+						}
+
 						if (erfasstePerson != null) {
 							main.addPerson(erfasstePerson);
 						}
@@ -80,6 +95,7 @@ public class AdreliMain {
 
 						while (!next.matches("J|N")) {
 							System.out.print("Nur `J` und `N` sind erlaubt: ");
+							next = main.getScanner().next();
 						}
 
 						if (next.equals("N")) {
@@ -188,33 +204,65 @@ public class AdreliMain {
 	}
 
 	/**
-	 * Record all properties for a person and create a new person.
+	 * Ueberladene Methode zum erfassen einer Person, ohne bereits eine
+	 * existierende zu haben.
 	 * 
-	 * @return the newly created person.
+	 * @return
 	 */
 	private Person erfassePerson() {
+		return erfassePerson(null);
+	}
+
+	/**
+	 * Methode zum erfassen einer Person, bei der auf einer bereits
+	 * existierenden Person aufgebaut wird.
+	 * 
+	 * @param existierendePerson
+	 *            die existierende Person; kann null sein, falls eine neue
+	 *            Person angelegt wird
+	 * @return die neue oder modifizierte Person
+	 */
+	private Person erfassePerson(Person exist) {
 		Person neuePerson = null;
 		System.out.println("Geben Sie bitte die Daten ein:");
 		System.out.println(" ");
 		// Scanner wird aufgerufen, gibt der Variable name einen Wert des Types
 		// String .next() legt fest dass die Methode bis zur Eingabe wartet und
 		// nicht weitergeht.
+		if (exist != null)
+			System.out.println("Alter Wert: " + exist.getVorname());
 		System.out.print("Vorname: ");
 		String vorname = erfasseVorname();
+		if (exist != null)
+			System.out.println("Alter Wert: " + exist.getName());
 		System.out.print("Name: ");
 		String name = erfasseName();
+		if (exist != null)
+			System.out.println("Alter Wert: " + exist.getAnrede());
 		System.out.print("Anrede: ");
 		String anrede = erfasseAnrede();
+		if (exist != null)
+			System.out.println("Alter Wert: " + exist.getStraße());
 		System.out.print("Straße: ");
 		String straße = erfasseStrasse();
+		if (exist != null)
+			System.out.println("Alter Wert: " + exist.getPLZ());
 		System.out.print("PLZ: ");
 		String plz = erfassePLZ();
+		if (exist != null)
+			System.out.println("Alter Wert: " + exist.getOrt());
 		System.out.print("Ort: ");
 		String ort = erfasseOrt();
+		if (exist != null)
+			System.out.println("Alter Wert: " + exist.getTelefon());
 		System.out.print("Telefon: ");
 		String telefon = erfasseTelefon();
+		if (exist != null)
+			System.out.println("Alter Wert: " + exist.getFax());
 		System.out.print("Fax: ");
 		String fax = erfasseFax();
+		if (exist != null)
+			System.out.println("Alter Wert: " + exist.getBemerkung());
 		System.out.print("Bemerkung: ");
 		String bemerkung = erfasseBemerkung();
 
@@ -277,8 +325,9 @@ public class AdreliMain {
 		getScanner().nextLine();
 		strasse = getScanner().nextLine();
 
-		// Strasse auf Korrektheit prüfen
-		while (!strasse.matches("[A-Z][a-z]*\\s[0-9]*")) {
+		// Strassenangaben auf Korrektheit prüfen
+		while (!strasse
+				.matches("[A-Z][a-z]*\\s[0-9]*|[A-Z][a-z]*\\s[A-Z][a-z]*\\s[0-9]*")) {
 			System.out
 					.println("Bitte Straßenname und Hausnr angeben bsp: Musterstrasse 5!");
 			System.out.print("Straße: ");
@@ -292,7 +341,8 @@ public class AdreliMain {
 	private String erfassePLZ() {
 		String plz = null;
 		plz = getScanner().next();
-		// PLZ auf Korrekheit prüfen
+
+		// PLZ auf Korrektheit prüfen
 		while (!plz.matches("[0-9]{5}")) {
 			System.out.println("Zahlen von 0-9 und 5 stellen sind erlaubt!");
 			System.out.print("PLZ: ");
@@ -307,7 +357,7 @@ public class AdreliMain {
 		getScanner().nextLine();
 		ort = getScanner().nextLine();
 
-		// Ort auf Korrektheit prüfen
+		// Ortsangaben auf Korrektheit prüfen
 		while (!ort.matches("[A-Z][a-z]*\\s[A-Za-z]*\\s[A-Za-z]*|[A-Z][a-z]*")) {
 			System.out
 					.println("Bitte den korrekten Ortsnamen angeben bsp: Frankfurt o. Frankfurt am Main");
