@@ -77,6 +77,7 @@ public class AdreliMain {
 						String allesOk = main.getScanner().next();
 						while (!allesOk.matches("J|N")) {
 							System.out.print("Nur `J` und `N` sind erlaubt: ");
+							allesOk = main.getScanner().next();
 						}
 
 						boolean korrigieren = allesOk.equals("N");
@@ -94,6 +95,7 @@ public class AdreliMain {
 
 						while (!next.matches("J|N")) {
 							System.out.print("Nur `J` und `N` sind erlaubt: ");
+							next = main.getScanner().next();
 						}
 
 						if (next.equals("N")) {
